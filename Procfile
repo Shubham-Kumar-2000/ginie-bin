@@ -1,1 +1,0 @@
-web: cd ./gb-backend && npm && npm start
