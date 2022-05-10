@@ -122,7 +122,7 @@ exports.transferToWallet = async (req, res, next) => {
             throw new Error('You have insuffient coins to transfer');
         }
 
-        const txHash = await Fire.transfer(decrypt(user.wallet.address),(user.ourCoins+TIMEOUT_PENALTY)*100000000000000)
+        const txHash = await Fire.transfer(decrypt(user.wallet.address),(user.ourCoins+TIMEOUT_PENALTY)*1000000000000000)
         await User.findOneAndUpdate({_id: user._id}, {$inc: {ourCoins:0-(user.ourCoins+TIMEOUT_PENALTY)}})
 
         res.status(200).json({
