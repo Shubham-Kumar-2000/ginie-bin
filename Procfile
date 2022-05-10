@@ -1,1 +1,1 @@
-web: cd ./gb-backend && npm start
+web: cd ./gb-backend && npm && npm start
