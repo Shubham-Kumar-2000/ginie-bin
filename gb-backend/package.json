@@ -7,8 +7,8 @@
   },
   "main": "./bin/www",
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
+    "start": "node ./credentials/firebase.js && node ./bin/www",
+    "dev": "node ./credentials/firebase.js && nodemon ./bin/www",
     "test": "echo 'no tests'",
     "format": "eslint . --fix",
     "checkFormat": "eslint .",
