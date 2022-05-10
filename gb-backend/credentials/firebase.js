@@ -1,3 +1,4 @@
+console.log(process.env.FIREBASE_PRIVATE_KEY)
 module.exports = {
   "type": "service_account",
   "project_id": process.env.FIREBASE_PROJECT_ID,
