@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku":"git subtree push --prefix gb-backend heroku main"
+    "heroku": "git subtree push --prefix gb-backend heroku main"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Shubham-Kumar-2000/ginie-bin/issues"
   },
-  "homepage": "https://github.com/Shubham-Kumar-2000/ginie-bin#readme"
+  "homepage": "https://github.com/Shubham-Kumar-2000/ginie-bin#readme",
+  "dependencies": {
+    "react-router-dom": "^6.3.0"
+  }
 }
