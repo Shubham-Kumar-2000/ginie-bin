@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=Lora:ital,wght@1,400;1,600&family=Permanent+Marker&family=Playfair+Display:ital,wght@1,400;1,500&family=Roboto+Slab&family=Sail&display=swap');
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(53, 52, 52);
+  font-family: 'Lora', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: whitesmoke;
+  font-weight: bold;
+  overflow-x: hidden;
+}
+
+textarea:focus, input:focus {
+  outline: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
