@@ -98,7 +98,7 @@ exports.getBalance = async (req, res, next) => {
 exports.mytransactions = async (req, res, next) => {
     try {
         const transactions = await Transaction.find({
-            user: req.user._id
+            userId: req.user._id
         }).sort({ createdAt: -1 });
 
         res.status(200).json({
@@ -118,12 +118,18 @@ exports.transferToWallet = async (req, res, next) => {
         if (!user.wallet) {
             throw new Error('Wallet not connected');
         }
-        if(user.ourCoins+TIMEOUT_PENALTY <= 0){
+        if (user.ourCoins + TIMEOUT_PENALTY <= 0) {
             throw new Error('You have insuffient coins to transfer');
         }
 
-        const txHash = await Fire.transfer(decrypt(user.wallet.address),(user.ourCoins+TIMEOUT_PENALTY)*1000000000000000)
-        await User.findOneAndUpdate({_id: user._id}, {$inc: {ourCoins:0-(user.ourCoins+TIMEOUT_PENALTY)}})
+        const txHash = await Fire.transfer(
+            decrypt(user.wallet.address),
+            (user.ourCoins + TIMEOUT_PENALTY) * 1000000000000000
+        );
+        await User.findOneAndUpdate(
+            { _id: user._id },
+            { $inc: { ourCoins: 0 - (user.ourCoins + TIMEOUT_PENALTY) } }
+        );
 
         res.status(200).json({
             success: true,
