@@ -19,6 +19,7 @@ exports.errorHandler = (err, req, res, _) => {
         });
     }
     const isDevelopment = req.app.get('env') === 'development';
+    console.log(err);
     return res.status(500).json({
         error: {
             message: isDevelopment ? String(err) : 'Something went wrong',

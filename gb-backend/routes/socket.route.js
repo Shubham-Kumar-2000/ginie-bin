@@ -5,7 +5,7 @@ const { socketBinAuth, socketUserAuth } = require('../helpers/socket.helper');
 
 exports.socketRouter = (server, app) => {
     const io = socketIo(server, { cors: { origin: '*' } });
-    
+
     io.of('/bin')
         .use(socketBinAuth)
         .on('connection', (socket) => handleBinSocket(socket, io));
