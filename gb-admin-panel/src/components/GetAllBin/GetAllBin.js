@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NotificationManager } from 'react-notifications';
 import binService from '../../services/binService';
 import './GetAllBin.css';
+import Bin from "../Bin/Bin";
 
 const GetAllBin = () => {
     const [bins, setBins] = useState([]);
@@ -9,14 +10,14 @@ const GetAllBin = () => {
     const loadAllBins = async () => {
         try {
             const response = await binService.getBin();
-
+            console.log(response.data);
             switch (response.status) {
                 case 200:
                     NotificationManager.success("Bins fetched successfully!");
                     setBins(response.data.bins);
                     break;
                 case 401:
-                    NotificationManager.warning("Not AUthorized");
+                    NotificationManager.warning("Not Authorized");
                     break;
                 default:
                     NotificationManager.error("Something went wrong");
@@ -42,17 +43,11 @@ const GetAllBin = () => {
             </thead>
             <tbody>
                 {bins?.map(bin => {
-                    return (<tr key={bin._id}>
-                        <td>{bin.name}</td>
-                        <td>{bin.status}</td>
-                        <td>{(parseInt(bin.filled) / parseInt(bin.height)) * 100}</td>
-                        {/* {(bin.public) ? <td><img alt="correct" src="https://img.icons8.com/officel/25/000000/checkmark--v2.png" /></td> : <td><img alt="wrong" src="https://img.icons8.com/color/25/000000/close-window.png" /></td>
-                        } */}
-                    </tr>)
+                    return (<Bin key={bin._id} bin={bin} />)
                 })}
             </tbody>
         </table>
     )
 }
 
-export default GetAllBin
+export default GetAllBin;

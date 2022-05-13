@@ -67,7 +67,6 @@ const AddBin = () => {
             console.error(e);
             NotificationManager.error("Sorry... Either the Network Connectivity is Lost or the Server is currently Unavailable. Please Try Again Later");
         }
-        console.log(responseBody);
     }
 
     return (
@@ -139,4 +138,4 @@ const AddBin = () => {
     );
 }
 
-export default AddBin
+export default AddBin;
