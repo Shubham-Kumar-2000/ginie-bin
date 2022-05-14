@@ -5,7 +5,7 @@ const login = async (token) => {
         {
             headers: { Authorization: token }
         })
-    localStorage.setItem('token', response.data.token);
+    return response.data.token;
 }
 
 const addBin = async (data) => {

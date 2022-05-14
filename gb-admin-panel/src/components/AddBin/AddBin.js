@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getCodes } from 'country-list';
 import { Form, Button } from 'react-bootstrap';
 import MapPicker from 'react-google-map-picker';
 import './AddBin.css'
 import binService from '../../services/binService';
 import { NotificationManager } from 'react-notifications';
+import TokenModal from '../TokenModal/TokenModal';
+import { AuthContext } from '../AuthContext/AuthContext';
 
 const DefaultLocation = { lat: 10, lng: 106 };
 const DefaultZoom = 10;
 
 const AddBin = () => {
+    const [showTokenModal, setShowTokenModal] = useState(false);
+    const handleTokenModal = () => setShowTokenModal(false);
+    const [token] = useContext(AuthContext);
     const [name, setName] = useState("");
     const [locationName, setLocationName] = useState("");
     const [address, setAddress] = useState("");
@@ -20,6 +25,13 @@ const AddBin = () => {
     const [country, setCountry] = useState("IN");
     const [location, setLocation] = useState(defaultLocation);
     const [zoom, setZoom] = useState(DefaultZoom);
+
+    useEffect(() => {
+        console.log("Hii pple");
+        navigator.geolocation.getCurrentPosition(function (position) {
+            setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+        });
+    }, [])
 
     function handleChangeLocation(lat, lng) {
         setLocation({ lat: lat, lng: lng });
@@ -56,6 +68,7 @@ const AddBin = () => {
             switch (response.status) {
                 case 201:
                     NotificationManager.success("Bin created successfully!");
+                    setShowTokenModal(true);
                     break;
                 case 401:
                     NotificationManager.warning("Not Authorized to add bin!");
@@ -67,11 +80,11 @@ const AddBin = () => {
             console.error(e);
             NotificationManager.error("Sorry... Either the Network Connectivity is Lost or the Server is currently Unavailable. Please Try Again Later");
         }
-        console.log(responseBody);
     }
 
     return (
         <div>
+            <TokenModal showModal={showTokenModal} handleTokenModal={handleTokenModal} token={token} />
             <Form style={{ width: "100%" }} onSubmit={handleFormSubmit}>
                 <div className='row'>
                     <div className='col-md-5'>
@@ -129,14 +142,14 @@ const AddBin = () => {
                     onChangeZoom={handleChangeZoom}
                     apiKey='AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8' />
                 <br></br>
-                <Button onClick={handleResetLocation}>Reset Location</Button>
+                <Button variant='outline-primary' onClick={handleResetLocation}>Reset Location</Button>
                 <br></br>
                 <br></br>
-                <Button type="submit">Save </Button>
+                <Button variant='outline-warning' type="submit">Save </Button>
             </Form>
             <hr></hr>
         </div>
     );
 }
 
-export default AddBin
+export default AddBin;
