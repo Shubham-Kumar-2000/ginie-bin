@@ -32,21 +32,11 @@ const GetAllBin = () => {
     }, [])
 
     return (
-        <table className="table table-dark table-striped table-content custom-table">
-            <thead>
-                <tr>
-                    <th scope="col">Bin Name</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Capacity</th>
-                    <th scope="col">Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                {bins?.map(bin => {
-                    return (<Bin key={bin._id} bin={bin} />)
-                })}
-            </tbody>
-        </table>
+        <div className="bin-card">
+            {bins?.map(bin => {
+                return (<Bin key={bin._id} bin={bin} />)
+            })}
+        </div>
     )
 }
 

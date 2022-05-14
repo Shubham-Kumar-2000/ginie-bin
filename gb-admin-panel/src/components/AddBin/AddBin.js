@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getCodes } from 'country-list';
 import { Form, Button } from 'react-bootstrap';
 import MapPicker from 'react-google-map-picker';
@@ -20,6 +20,12 @@ const AddBin = () => {
     const [country, setCountry] = useState("IN");
     const [location, setLocation] = useState(defaultLocation);
     const [zoom, setZoom] = useState(DefaultZoom);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+        });
+    }, [])
 
     function handleChangeLocation(lat, lng) {
         setLocation({ lat: lat, lng: lng });

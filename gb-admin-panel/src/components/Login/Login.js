@@ -4,7 +4,7 @@ import { getApp } from 'firebase/app';
 import binService from '../../services/binService';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext/AuthContext';
-import { Button, Nav } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const Login = () => {
     const navigate = useNavigate();
