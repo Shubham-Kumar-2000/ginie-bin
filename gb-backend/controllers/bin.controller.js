@@ -26,7 +26,21 @@ exports.createBin = async (req, res, next) => {
 
 exports.allBins = async (req, res, next) => {
     try {
-        const bins = await Bin.find({ ...req.query }).sort({
+        const filter = { ...req.query };
+        if (req.query.lat && req.query.lng) {
+            delete filter.lat;
+            delete filter.lng;
+            filter['location.geoLocation'] = {
+                $near: {
+                    $geometry: {
+                        type: 'Point',
+                        coordinates: [req.query.lng, req.query.lat]
+                    },
+                    $maxDistance: 5000
+                }
+            };
+        }
+        const bins = await Bin.find(filter).sort({
             createdAt: -1
         });
 
