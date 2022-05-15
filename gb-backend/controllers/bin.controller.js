@@ -110,8 +110,7 @@ exports.handleBinSocket = async (socket, io) => {
                 $set: {
                     height: socket.handshake?.query?.height,
                     status: constants.BIN_STATUS.ACTIVE,
-                    wet: 0,
-                    dry: 0
+                    filled: 0
                 },
                 $unset: { transactionId: '' }
             },
