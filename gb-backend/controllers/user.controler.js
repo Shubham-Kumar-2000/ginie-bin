@@ -124,7 +124,7 @@ exports.transferToWallet = async (req, res, next) => {
 
         const txHash = await Fire.transfer(
             decrypt(user.wallet.address),
-            (user.ourCoins + TIMEOUT_PENALTY) * 1000000000000000
+            (user.ourCoins + TIMEOUT_PENALTY) * 1000000000000000000
         );
         await User.findOneAndUpdate(
             { _id: user._id },

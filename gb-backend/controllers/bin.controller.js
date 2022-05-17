@@ -94,7 +94,14 @@ exports.handleSuccessfullTransaction = async (
         ),
         Transaction.findOneAndUpdate(
             { _id: bin.transactionId._id },
-            { $set: { status: constants.TRANSACTION_STATUS.COMPLETED, coins } }
+            {
+                $set: {
+                    status: constants.TRANSACTION_STATUS.COMPLETED,
+                    coins,
+                    height,
+                    weight
+                }
+            }
         )
     ]);
     io.of('/user')
