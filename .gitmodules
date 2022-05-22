@@ -1,0 +1,3 @@
+[submodule "gb-android"]
+	path = gb-android
+	url = https://github.com/BishyanKar/Smart-Bin-Android.git
